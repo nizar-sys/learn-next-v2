@@ -14,7 +14,6 @@ export const getStaticProps = async (ctx) => {
 
 function Index(props) {
   const { categories } = props;
-  console.log(process.env);
   return (
     <Layout headTitle="Categories" currPage="categories">
       <div>
