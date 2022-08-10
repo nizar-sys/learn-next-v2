@@ -12,8 +12,13 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "/", current: true, page: 'dashboard' },
-  { name: "Categories", href: "/categories", current: false, page: 'categories' },
+  { name: "Dashboard", href: "/", current: true, page: "dashboard" },
+  {
+    name: "Categories",
+    href: "/categories",
+    current: false,
+    page: "categories",
+  },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -102,15 +107,16 @@ export default function Layout(props) {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a
-                                    href={item.href}
-                                    className={classNames(
-                                      active ? "bg-gray-100" : "",
-                                      "block px-4 py-2 text-sm text-gray-700"
-                                    )}
-                                  >
-                                    {item.name}
-                                  </a>
+                                  <Link href={item.href} key={item.name}>
+                                    <a
+                                      className={classNames(
+                                        active ? "bg-gray-100" : "",
+                                        "block px-4 py-2 text-sm text-gray-700"
+                                      )}
+                                    >
+                                      {item.name}
+                                    </a>
+                                  </Link>
                                 )}
                               </Menu.Item>
                             ))}
@@ -200,7 +206,9 @@ export default function Layout(props) {
 
         <header className="bg-white shadow">
           <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold text-gray-900">{props.headTitle}</h1>
+            <h1 className="text-3xl font-bold text-gray-900">
+              {props.headTitle}
+            </h1>
           </div>
         </header>
         <main>
