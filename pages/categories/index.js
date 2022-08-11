@@ -1,19 +1,24 @@
+import axios from "axios";
+import { useState } from "react";
 import Layout from "../../components/Layout";
 
 export const getStaticProps = async (ctx) => {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const res = await fetch(`http://localhost:3004/categories`);
-  const categories = await res.json()
+  const categories = await axios.get('http://localhost:3004/categories');
   return {
     props: {
-      categories,
+      categories: categories.data,
     },
   }
 }
 
 function Index(props) {
   const { categories } = props;
+
+  const [modal, setModal] = useState();
+  const triggerModal = () => {
+    setModal(true);
+    console.log(modal);
+  }
   return (
     <Layout headTitle="Categories" currPage="categories">
       <div>
@@ -22,7 +27,9 @@ function Index(props) {
             <div className="sm:flex items-center justify-between">
               <div className="flex items-center">
               <button
+                onClick={triggerModal}
                 className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
+                data-bs-toggle="modal" data-bs-target="#add-category-modal"
               >
                 <p className="text-sm font-medium leading-none text-white">
                   Add Categories
